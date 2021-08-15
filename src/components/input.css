@@ -1,0 +1,31 @@
+.todo-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#todo-input-field {
+  font-family: "Almarai", sans-serif;
+  border: none;
+  height: 50px;
+  width: 380px;
+  outline: none;
+  font-size: 30px;
+  padding-left: 5px;
+}
+
+.todo-input-add-button {
+  border: none;
+  background-color: rgb(255, 255, 255);
+  width: 50px;
+  outline: none;
+  font-size: 35px;
+  text-align: center;
+  color: rgb(255, 68, 0);
+  cursor: pointer;
+}
+
+.todo-input-add-button:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 68, 0);
+}
