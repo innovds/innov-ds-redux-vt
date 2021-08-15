@@ -9,8 +9,8 @@ export interface Todo {
 
 export interface TaskProps {
   todo: Todo;
-  handleChange: () => void;
-  deleteItem: () => void;
+  handleChange: (id: number) => void;
+  deleteItem: (id: number) => void;
 }
 
 const Task: FC<TaskProps> = ({ todo, handleChange, deleteItem }) => {
@@ -21,10 +21,10 @@ const Task: FC<TaskProps> = ({ todo, handleChange, deleteItem }) => {
       }
     >
       <li className="todo-item">{todo.text}</li>
-      <button onClick={handleChange} className="item-check">
+      <button onClick={() => handleChange(todo.id)} className="item-check">
         <i className="fas fa-check"></i>
       </button>
-      <button onClick={deleteItem} className="item-remove">
+      <button onClick={() => deleteItem(todo.id)} className="item-remove">
         <i className="fas fa-trash-alt"></i>
       </button>
     </div>

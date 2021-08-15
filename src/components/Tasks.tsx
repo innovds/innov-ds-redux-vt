@@ -16,8 +16,8 @@ const Tasks: FC<TasksProps> = ({ todos, changeItemState, deleteItem }) => {
           <Task
             key={todo.id}
             todo={todo}
-            handleChange={changeItemState.bind(this, todo.id)}
-            deleteItem={deleteItem.bind(this, todo.id)}
+            handleChange={changeItemState}
+            deleteItem={deleteItem}
           />
         ))}
       </ul>
