@@ -1,8 +1,14 @@
-export interface TotalTodosProps {
-  total: number;
-}
+import { FC, useEffect } from "react";
+import { useAppSelector } from "../app/hooks";
+import { todoSelectors } from "../redux/slices/todoSlice";
 
-const TotalTodos: React.SFC<TotalTodosProps> = ({ total }) => {
+export interface TotalTodosProps {}
+
+const TotalTodos: FC<TotalTodosProps> = () => {
+  const total = useAppSelector(todoSelectors.selectTotal);
+  useEffect(() => {
+    console.log(`Total Todos get rendered to ${total}`);
+  });
   return <div>{total}</div>;
 };
 

@@ -1,16 +1,17 @@
 import { FC, FormEvent, useState } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { addTodo } from "../redux/slices/todoSlice";
 import "./input.css";
 
-export interface InputProps {
-  addTodo: (inputValue: string) => void;
-}
+export interface InputProps {}
 
-const Input: FC<InputProps> = ({ addTodo }) => {
+const Input: FC<InputProps> = () => {
   const [inputValue, setInputValue] = useState("");
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTodo(inputValue);
+    dispatch(addTodo(inputValue));
     setInputValue("");
   };
 

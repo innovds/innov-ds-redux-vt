@@ -1,12 +1,15 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import todosReducer from "../redux/slices/todoSlice";
+import postReducer, { getAllPosts } from "../redux/slices/postSlice";
 
 export const store = configureStore({
   reducer: {
-    // posts: postsReducer,
+    posts: postReducer,
     todos: todosReducer,
   },
 });
+
+store.dispatch(getAllPosts());
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

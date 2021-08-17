@@ -2,15 +2,13 @@ import { FC } from "react";
 import "./header.css";
 import TotalTodos from "./TotalTodos";
 
-export interface HeaderProps {
-  total: number;
-}
+export interface HeaderProps {}
 
-const Header: FC<HeaderProps> = ({ total }) => {
+const Header: FC<HeaderProps> = () => {
   return (
     <h1 className="title">
       <i className="fas fa-list"></i> ToDo List
-      <TotalTodos total={total} />
+      <TotalTodos />
     </h1>
   );
 };

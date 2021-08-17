@@ -1,24 +1,23 @@
 import Task, { Todo } from "./Task";
 import "./header.css";
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { todoSelectors } from "../redux/slices/todoSlice";
+import { useAppSelector } from "../app/hooks";
 
-export interface TasksProps {
-  todos: Todo[];
-  changeItemState: (id: number) => void;
-  deleteItem: (id: number) => void;
-}
+export interface TasksProps {}
 
-const Tasks: FC<TasksProps> = ({ todos, changeItemState, deleteItem }) => {
+const Tasks: FC<TasksProps> = () => {
+  const todosIds = useAppSelector(todoSelectors.selectIds);
+
+  useEffect(() => {
+    console.log(`Tasks get rendered`);
+  });
+
   return (
     <div className="todo-items-container">
       <ul className="todo-items-list">
-        {todos.map((todo) => (
-          <Task
-            key={todo.id}
-            todo={todo}
-            handleChange={changeItemState}
-            deleteItem={deleteItem}
-          />
+        {todosIds.map((id) => (
+          <Task key={id} id={id as string} />
         ))}
       </ul>
     </div>

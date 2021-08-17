@@ -1,45 +1,38 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createEntityAdapter,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Todo } from "../../components/Task";
+import { generate } from "shortid";
 
-const initialState: { todos: Todo[] } = {
-  todos: [],
-};
+const todoAdapter = createEntityAdapter<Todo>({
+  selectId: (todo) => todo.id,
+});
 
 const todoSlice = createSlice({
-  name: "todo",
-  initialState,
+  name: "todos",
+  initialState: todoAdapter.getInitialState(),
   reducers: {
     addTodo(state, action: PayloadAction<string>) {
       const todo: Todo = {
-        id: state.todos.length,
+        id: generate(),
         text: action.payload,
         completed: false,
       };
-      state.todos.push(todo);
+      todoAdapter.addOne(state, todo);
       // return [...state.todos,action.payload];
     },
-    changeItemState(state, action: PayloadAction<number>) {
-      for (let i = 0; i < state.todos.length; i++) {
-        if (state.todos[i].id === action.payload) {
-          state.todos[i].completed = !state.todos[i].completed;
-          break;
-        }
-      }
-    },
-    deleteTodo(state, action: PayloadAction<number>) {
-      state.todos = state.todos.filter(
-        (todo: Todo) => todo.id !== action.payload
-      );
-    },
+    changeItemState: todoAdapter.updateOne,
+    deleteTodo: todoAdapter.removeOne,
   },
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, changeItemState, deleteTodo } = todoSlice.actions;
 
-export const selectTodos = (state: RootState) => state.todos.todos;
-
-export const selectTodoById = (state: RootState, id: number) =>
-  state.todos.todos[id];
+export const todoSelectors = todoAdapter.getSelectors(
+  (state: RootState) => state.todos
+);
 
 export default todoSlice.reducer;
