@@ -10,9 +10,13 @@ const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    addTodo(state, action: PayloadAction<Todo>) {
-      action.payload.id = state.todos.length;
-      state.todos.push(action.payload);
+    addTodo(state, action: PayloadAction<string>) {
+      const todo: Todo = {
+        id: state.todos.length,
+        text: action.payload,
+        completed: false,
+      };
+      state.todos.push(todo);
       // return [...state.todos,action.payload];
     },
     changeItemState(state, action: PayloadAction<number>) {
