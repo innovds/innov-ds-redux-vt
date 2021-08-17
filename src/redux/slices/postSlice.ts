@@ -38,9 +38,9 @@ const postSlice = createSlice({
   },
 });
 
-export const postSelectors = postEntityAdapter.getSelectors<RootState>(
-  (state) => state.posts
-);
+// export const postSelectors = postEntityAdapter.getSelectors<RootState>(
+//   (state) => state.posts
+// );
 
 export const { removeOnePost } = postSlice.actions;
 
