@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header total={todos.length} />
       <div className="container">
         <Input addTodo={addTodo} />
         <Tasks
